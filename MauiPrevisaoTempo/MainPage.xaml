@@ -1,0 +1,270 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="MauiPrevisaoTempo.MainPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:converter="clr-namespace:MauiPrevisaoTempo.Converters"
+    xmlns:model="clr-namespace:MauiPrevisaoTempo.Models"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="labelStyle" TargetType="Label">
+                <Setter Property="FontSize" Value="Small" />
+                <Setter Property="TextColor" Value="Gray" />
+            </Style>
+            <Style x:Key="labelResultStyle" TargetType="Label">
+                <Setter Property="FontSize" Value="Medium" />
+                <Setter Property="Margin" Value="10,0,0,0" />
+            </Style>
+            
+            <converter:LongToDateTimeConverter x:Key="longToDatetimeConverter" />
+
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+
+    <Grid VerticalOptions="FillAndExpand">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Image
+            Aspect="Fill"
+            HeightRequest="300"
+            Source="overlay.png"
+            VerticalOptions="StartAndExpand" />
+
+        <StackLayout
+            Margin="20,50"
+            HorizontalOptions="Start"
+            Orientation="Vertical"
+            Spacing="20"
+            VerticalOptions="Start">
+            <StackLayout Orientation="Horizontal">
+                <Label
+                    FontSize="16"
+                    Text="{Binding Name}" 
+                    TextColor="White"
+                    VerticalOptions="Center" />
+                <Label
+                    FontSize="16"
+                    Text=" - " 
+                    TextColor="White"
+                    VerticalOptions="Center" />
+                <Label
+                    FontSize="16"
+                    Text="{Binding Sys.Country}"  
+                    TextColor="White"
+                    VerticalOptions="Center" />
+            </StackLayout>
+        </StackLayout>
+
+        <StackLayout
+            Margin="0,20"
+            HorizontalOptions="Center"
+            Orientation="Vertical"
+            VerticalOptions="Center">
+            <StackLayout HorizontalOptions="Center" Orientation="Horizontal">
+                <Image
+                    HeightRequest="50"
+                    Source="weather.png"
+                    VerticalOptions="Center"
+                    WidthRequest="50" />
+                <Label
+                    FontAttributes="Bold"
+                    FontSize="70"
+                    Text="{Binding Main.Temp}"
+                    TextColor="White"
+                    VerticalOptions="Center" />
+                <Label
+                    FontSize="34"
+                    Text="°C"
+                    TextColor="White"
+                    VerticalOptions="Center" />
+            </StackLayout>
+            <Label
+                FontSize="18"
+                HorizontalOptions="Center"
+                Text="{Binding Weather[0].Description}"
+                TextColor="White" />
+            <Label
+                FontSize="12"
+                HorizontalOptions="Center"
+                Text="macoratti.net"
+                TextColor="Yellow" />
+        </StackLayout>
+
+        <Frame
+            Grid.Row="1"
+            Margin="20,-40,20,0"
+            Padding="0"
+            CornerRadius="10"
+            HasShadow="True"
+            HeightRequest="120"
+            VerticalOptions="Start">
+
+            <Grid
+                Margin="0,0,0,0"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="CenterAndExpand">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <StackLayout
+                    HorizontalOptions="CenterAndExpand"
+                    Orientation="Vertical"
+                    Spacing="10">
+                    <Image Source="humidity.png" />
+                    <StackLayout HorizontalOptions="CenterAndExpand" Spacing="7">
+                        <Label
+                            FontAttributes="Bold"
+                            FontSize="14"
+                            HorizontalOptions="Center"
+                            Text="{Binding Main.Humidity}"
+                            TextColor="Black" />
+                        <Label
+                            FontSize="11"
+                            HorizontalOptions="Center"
+                            Text="Himidade"
+                            TextColor="#7D7D7D" />
+                    </StackLayout>
+                </StackLayout>
+
+                <StackLayout
+                    Grid.Column="1"
+                    HorizontalOptions="CenterAndExpand"
+                    Orientation="Vertical"
+                    Spacing="10">
+                    <Image Source="wind.png" />
+                    <StackLayout HorizontalOptions="CenterAndExpand" Spacing="7">
+                        <Label
+                            FontAttributes="Bold"
+                            FontSize="14"
+                            HorizontalOptions="Center"
+                            Text="{Binding Wind.Speed}"
+                            TextColor="Black" />
+                        <Label
+                            FontSize="11"
+                            HorizontalOptions="Center"
+                            Text="Ventos"
+                            TextColor="#7D7D7D" />
+                    </StackLayout>
+                </StackLayout>
+
+                <StackLayout
+                    Grid.Column="2"
+                    HorizontalOptions="CenterAndExpand"
+                    Orientation="Vertical"
+                    Spacing="10">
+                    <Image Source="pressure.png" />
+                    <StackLayout HorizontalOptions="CenterAndExpand" Spacing="7">
+                        <Label
+                            FontAttributes="Bold"
+                            FontSize="14"
+                            HorizontalOptions="Center"
+                            Text="{Binding Main.Pressure}"
+                            TextColor="Black" />
+                        <Label
+                            FontSize="11"
+                            HorizontalOptions="Center"
+                            Text="Pressão"
+                            TextColor="#7D7D7D" />
+                    </StackLayout>
+                </StackLayout>
+
+                <StackLayout
+                    Grid.Column="3"
+                    HorizontalOptions="CenterAndExpand"
+                    Orientation="Vertical"
+                    Spacing="10">
+                    <Image Source="cloudiness.png" />
+                    <StackLayout HorizontalOptions="CenterAndExpand" Spacing="7">
+                        <Label
+                            FontAttributes="Bold"
+                            FontSize="14"
+                            HorizontalOptions="Center"
+                            Text="{Binding Clouds.All}"
+                            TextColor="Black" />
+                        <Label
+                            FontSize="11"
+                            HorizontalOptions="Center"
+                            Text="Nebulosidade"
+                            TextColor="#7D7D7D" />
+                    </StackLayout>
+                </StackLayout>
+
+            </Grid>
+        </Frame>
+
+
+        <StackLayout
+            Grid.Row="2"
+            Margin="20,40,0,60"
+            Orientation="Vertical"
+            Spacing="20">
+            <StackLayout Orientation="Horizontal" Spacing="40">
+                <Label
+                    FontAttributes="Bold"
+                    FontSize="Small"
+                    Text="Nascente : "
+                    TextColor="Black"
+                    VerticalOptions="Center" />
+                <Label
+                    FontSize="15"
+                    Text="{Binding Sys.Sunrise, Converter={StaticResource longToDatetimeConverter}}"
+                    TextColor="Black"
+                    VerticalOptions="Center" />
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" Spacing="40">
+                <Label
+                    FontAttributes="Bold"
+                    FontSize="Small"
+                    Text="Poente      : "
+                    TextColor="Black"
+                    VerticalOptions="Center" />
+                <Label
+                    FontSize="15"
+                    Text="{Binding Sys.Sunset, Converter={StaticResource longToDatetimeConverter}}"
+                    TextColor="Black"
+                    VerticalOptions="Center" />
+            </StackLayout>
+        </StackLayout>
+
+
+        <StackLayout
+            Grid.Row="3"
+            Margin="0,40,0,0"
+            Orientation="Horizontal" HorizontalOptions="Center">
+            <Entry
+                x:Name="_cidade"
+                Margin="5,0"
+                BackgroundColor="#7c58c9"
+                HorizontalTextAlignment="Center"
+                ClearButtonVisibility="WhileEditing"
+                Text="Santos"
+                FontAttributes="Bold"
+                TextColor="White"
+                VerticalOptions="Center"
+                WidthRequest="250" />
+            <Button
+                BackgroundColor="#7c58c9"
+                BorderColor="White"
+                FontAttributes="Bold"
+                BorderWidth="1"
+                Clicked="Button_Clicked"
+                Text="Previsão"
+                TextColor="White" />
+        </StackLayout>
+
+    </Grid>
+
+</ContentPage>
